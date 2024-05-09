@@ -1,0 +1,47 @@
+[
+    {
+      "title": "Smartphone",
+      "description": "Latest model with advanced features.",
+      "code": "SP123",
+      "price": "599.99",
+      "stock": "50",
+      "category": "electronics",
+      "id": 0
+    },
+    {
+      "title": "Laptop",
+      "description": "Powerful laptop for work and entertainment.",
+      "code": "LT456",
+      "price": "1099.99",
+      "stock": "20",
+      "category": "electronics",
+      "id": 1
+    },
+    {
+      "title": "Headphones",
+      "description": "High-quality noise-canceling headphones.",
+      "code": "HD789",
+      "price": "199.99",
+      "stock": "30",
+      "category": "electronics",
+      "id": 2
+    },
+    {
+      "title": "Wireless Mouse",
+      "description": "Ergonomic design for comfortable use.",
+      "code": "WM101",
+      "price": "29.99",
+      "stock": "100",
+      "category": "electronics",
+      "id": 3
+    },
+    {
+      "title": "Smart TV",
+      "description": "4K Ultra HD Smart TV with built-in streaming apps.",
+      "code": "TV567",
+      "price": "799.99",
+      "stock": "10",
+      "category": "electronics",
+      "id": 4
+    }
+  ]

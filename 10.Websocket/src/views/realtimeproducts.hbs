@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>New Product</title>
+	<link rel="stylesheet" href="/css/realtimeproducts.css">
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+	<form id="product-form">
+		<label for="title">Title:</label>
+		<input type="text" id="title" name="title"><br>
+
+		<label for="description">Description:</label>
+		<input type="text" id="description" name="description"><br>
+
+		<label for="code">Code:</label>
+		<input type="text" id="code" name="code"><br>
+
+		<label for="price">Price:</label>
+		<input type="number" id="price" name="price"><br>
+
+		<label for="stock">Stock:</label>
+		<input type="number" id="stock" name="stock"><br>
+
+		<label for="category">Category:</label>
+		<select id="category" name="category">
+			<option value="electronics">Electronics</option>
+			<option value="clothing">Clothing</option>
+			<option value="books">Books</option>
+		</select><br>
+
+		<button type="submit">Submit</button>
+	</form>
+
+	<ul id="product-list"></ul>
+
+	<script type="text/javascript">
+		const socket = io();
+
+		$(document).ready(function () {
+			$('#product-form').submit(function (event) {
+				event.preventDefault();
+
+				const title = $('#title').val();
+				const description = $('#description').val();
+				const code = $('#code').val();
+				const price = $('#price').val();
+				const stock = $('#stock').val();
+				const category = $('#category').val();
+
+				const newProduct = {
+					title: title,
+					description: description,
+					code: code,
+					price: price,
+					stock: stock,
+					category: category
+				};
+
+				socket.emit('new-product', newProduct);
+			});
+		});
+
+		socket.on('new-product-list', (productList) => {
+			const productListEl = document.querySelector('#product-list');
+			productListEl.innerHTML = '';
+
+			// Crear la tabla
+			const table = document.createElement('table');
+
+			// Crear la fila de encabezado
+			const headerRow = document.createElement('tr');
+			headerRow.innerHTML = '<th>Title</th><th>Description</th><th>Code</th><th>Price</th><th>Stock</th><th>Category</th>';
+			table.appendChild(headerRow);
+
+			// Agregar cada producto como una fila de la tabla
+			productList.forEach((product) => {
+				const row = document.createElement('tr');
+				row.innerHTML = `<td>${product.title}</td><td>${product.description}</td><td>${product.code}</td><td>${product.price}</td><td>${product.stock}</td><td>${product.category}</td>`;
+				table.appendChild(row);
+			});
+
+			// Agregar la tabla al contenedor
+			productListEl.appendChild(table);
+		});
+	</script>
+</body>
+
+
+</html>
